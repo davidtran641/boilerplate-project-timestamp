@@ -27,4 +27,10 @@ test('valid date', () => {
 test('invalid time', () => {
     expect(myApp.parseTime('abc')).toStrictEqual({error : "Invalid Date"});
     expect(myApp.parseTime('1970-01-0101')).toStrictEqual({error : "Invalid Date"});
+    expect(myApp.parseTime('')).toStrictEqual({error: 'Invalid Date'});
+});
+
+test('empty time', () => {
+    expect(myApp.parseTime(null).unix).toBeDefined();
+    expect(myApp.parseTime(null).utc).toBeDefined();
 });
