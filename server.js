@@ -4,10 +4,12 @@
 // init project
 var express = require('express');
 var app = express();
+const myApp = require("./myApp.js");
 
 // enable CORS (https://en.wikipedia.org/wiki/Cross-origin_resource_sharing)
 // so that your API is remotely testable by FCC 
 var cors = require('cors');
+const { json } = require('express');
 app.use(cors({optionsSuccessStatus: 200}));  // some legacy browsers choke on 204
 
 // http://expressjs.com/en/starter/static-files.html
@@ -24,7 +26,18 @@ app.get("/api/hello", function (req, res) {
   res.json({greeting: 'hello API'});
 });
 
+app.get("/api/timestamp", function (req, res) {
+  res.json(myApp.parseTime(null));
+});
 
+app.get("/api/timestamp", function (req, res) {
+  res.json(myApp.parseTime(null));
+});
+
+app.get("/api/timestamp/:date", function (req, res) {
+  console.log(req.params);
+  res.json(myApp.parseTime(req.params.date));
+});
 
 // listen for requests :)
 var listener = app.listen(process.env.PORT, function () {
